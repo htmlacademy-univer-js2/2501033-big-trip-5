@@ -1,4 +1,4 @@
-import { render, RenderPosition } from '../render.js';
+import { render } from '../render.js';
 import FiltersView from '../view/filters-view.js';
 import SortView from '../view/sort-view.js';
 import TripEventsView from '../view/trip-events-view.js';
@@ -15,13 +15,13 @@ export default class TripPresenter {
     const filtersContainer = document.querySelector('.trip-controls__filters');
     render(new FiltersView(), filtersContainer);
     render(new SortView(), this.mainContainer);
-    
+
     const tripEventsContainer = new TripEventsView();
     render(tripEventsContainer, this.mainContainer);
 
     render(new CreateFormView(), tripEventsContainer.getElement());
     render(new EditFormView(), tripEventsContainer.getElement());
-    
+
     for (let i = 0; i < 3; i++) {
       render(new EventPointView(), tripEventsContainer.getElement());
     }

@@ -7,8 +7,9 @@ import CreateFormView from '../view/create-form-view.js';
 import EditFormView from '../view/edit-form-view.js';
 
 export default class TripPresenter {
-  constructor(mainContainer) {
+  constructor(mainContainer, tripModel) {
     this.mainContainer = mainContainer;
+    this.tripModel = tripModel;
   }
 
   init() {
@@ -19,11 +20,14 @@ export default class TripPresenter {
     const tripEventsContainer = new TripEventsView();
     render(tripEventsContainer, this.mainContainer);
 
-    render(new CreateFormView(), tripEventsContainer.getElement());
-    render(new EditFormView(), tripEventsContainer.getElement());
+    const points = this.tripModel.getPoints();
 
-    for (let i = 0; i < 3; i++) {
-      render(new EventPointView(), tripEventsContainer.getElement());
+    if (points.length > 0) {
+      render(new EditFormView(points[0]), tripEventsContainer.getElement());
     }
+
+    points.forEach((point) => {
+      render(new EventPointView(point), tripEventsContainer.getElement());
+    });
   }
 }

@@ -1,26 +1,22 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
-export default class EventPointView {
+export default class EventPointView extends AbstractView {
   constructor(point) {
+    super();
     this.point = point;
+    this._callback = {};
   }
 
-  getTemplate() {
-    const {
-      base_price,
-      date_from,
-      date_to,
-      type,
-      destination
-    } = this.point;
-
+  get template() {
+    const { base_price, date_from, date_to, type, destination } = this.point;
     const cityName = destination ? destination.name : 'Chamonix';
+
     return `
       <li class="trip-events__item">
         <div class="event">
           <time class="event__date">${date_from}</time>
           <div class="event__type">
-            <img class="event__type-icon" width="42" height="42" 
+            <img class="event__type-icon" width="42" height="42"
                  src="img/icons/${type}.png" alt="Event type icon">
           </div>
           <h3 class="event__title">${type} ${cityName}</h3>
@@ -37,7 +33,6 @@ export default class EventPointView {
           </p>
           <h4 class="visually-hidden">Offers:</h4>
           <ul class="event__selected-offers">
-            <!-- Если хотите вывести реальные офферы, нужно пробежаться по this.point.offers -->
           </ul>
           <button class="event__favorite-btn" type="button">
             <span class="visually-hidden">Add to favorite</span>
@@ -53,14 +48,16 @@ export default class EventPointView {
     `;
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
+
+  setRollupClickHandler(callback) {
+    this._callback.rollupClick = callback;
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#rollupClickHandler);
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  #rollupClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.rollupClick();
+  };
 }

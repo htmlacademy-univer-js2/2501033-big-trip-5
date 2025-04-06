@@ -1,7 +1,13 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
-export default class CreateFormView {
-  getTemplate() {
+export default class CreateFormView extends AbstractView {
+  constructor(point) {
+    super();
+    this.point = point;
+    this._callback = {};
+  }
+
+  get template() {
     return `
             <li class="trip-events__item">
                 <form class="event event--edit" action="#" method="post">
@@ -168,14 +174,15 @@ export default class CreateFormView {
     `;
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
+  setFormSubmitHandler(callback) {
+    this._callback.formSubmit = callback;
+    this.element
+      .querySelector('form')
+      .addEventListener('submit', this.#formSubmitHandler);
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.formSubmit();
+  };
 }

@@ -3,6 +3,6 @@ import TripModel from './model/trip-model.js';
 
 const mainContainer = document.querySelector('.trip-events');
 const tripModel = new TripModel();
-const tripPresenter = new TripPresenter(mainContainer, tripModel);
 
+const tripPresenter = new TripPresenter(mainContainer, tripModel);
 tripPresenter.init();

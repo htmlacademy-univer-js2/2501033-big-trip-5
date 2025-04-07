@@ -9,7 +9,7 @@ function findDestinationById(destId) {
 
 function findAllTypeOffers(type) {
   const offersByType = offers.find((o) => o.type === type);
-  return offersByType ? offersByType.offers : []; 
+  return offersByType ? offersByType.offers : [];
 }
 
 function findOffersByIds(offerIds, allTypeOffers) {

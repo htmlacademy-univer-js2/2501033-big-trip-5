@@ -1,25 +1,27 @@
-import { SortView, PointListView, EmptyListView } from '../view';
+import { PointListView, EmptyListView } from '../view';
 import { render } from '../framework/render.js';
-import { PointPresenter } from '../presenter';
+import { PointPresenter, SortPresenter } from '../presenter';
 import { updateItem } from '../utils/common';
+import { sort } from '../utils/sort.js';
 
 export default class TripPresenter {
   #pointListComponent = new PointListView();
   #emptyListComponent = new EmptyListView();
-  #sortComponent = new SortView();
-  #pointPresenters = new Map();
   #tripContainer = null;
   #destinationsModel = null;
   #offersModel = null;
   #pointsModel = null;
   #points = [];
 
+  #pointPresenters = new Map();
+  #sortPresenter = null;
+
   constructor({ tripContainer, destinationsModel, offersModel, pointsModel }) {
     this.#tripContainer = tripContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#pointsModel = pointsModel;
-    this.#points = [...this.#pointsModel.getAll()];
+    this.#points = sort([...this.#pointsModel.getAll()]);
   }
 
   init() {
@@ -38,7 +40,12 @@ export default class TripPresenter {
   };
 
   #renderSort = () => {
-    render(this.#sortComponent, this.#tripContainer);
+    this.#sortPresenter = new SortPresenter({
+      container: this.#tripContainer,
+      handleSortChange: this.#handleSortChange,
+    });
+
+    this.#sortPresenter.init();
   };
 
   #renderPointList = () => {
@@ -74,5 +81,11 @@ export default class TripPresenter {
 
   #handleModeChange = () => {
     this.#pointPresenters.forEach((presenter) => presenter.resetView());
+  };
+
+  #handleSortChange = (sortType) => {
+    this.#points = sort(this.#points, sortType);
+    this.#clearPoints();
+    this.#renderPoints();
   };
 }

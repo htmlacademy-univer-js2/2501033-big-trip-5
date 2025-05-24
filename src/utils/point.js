@@ -22,6 +22,14 @@ export const getPointDuration = (dateFrom, dateTo) => {
   return dayjs.duration(timeDiff).format('mm[M]');
 };
 
+export const getPointsDateDifference = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
+export const getPointsPriceDifference = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
+export const getPointsDurationDifference = (pointA, pointB) => {
+  const durationA = dayjs(pointA.dateTo).diff(dayjs(pointA.dateFrom));
+  const durationB = dayjs(pointB.dateTo).diff(dayjs(pointB.dateFrom));
+  return durationB - durationA;
+};
+
 export const isPointFuture = (point) => dayjs().isBefore(point.dateFrom);
 export const isPointPast = (point) => dayjs().isAfter(point.dateTo);
 export const isPointPresent = (point) => dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo);

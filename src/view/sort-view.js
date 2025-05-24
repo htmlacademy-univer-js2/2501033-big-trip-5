@@ -1,9 +1,8 @@
-import { POINT_SORTS } from '../const.js';
-import AbstractView from '../framework/view/abstract-view.js';
 import { createSortTemplate } from '../template/sort-template.js';
+import AbstractRadioListView from './abstract-radio-list-view.js';
 
-export default class SortView extends AbstractView {
+export default class SortView extends AbstractRadioListView {
   get template() {
-    return createSortTemplate({ sorts: POINT_SORTS });
+    return createSortTemplate({ sorts: this.items });
   }
 }

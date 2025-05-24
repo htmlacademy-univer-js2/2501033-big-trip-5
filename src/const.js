@@ -36,14 +36,6 @@ export const POINT_TYPES = [
   'restaurant',
 ];
 
-export const POINT_SORTS = [
-  { type: 'day', isDisabled: false },
-  { type: 'event', isDisabled: true },
-  { type: 'time', isDisabled: false },
-  { type: 'price', isDisabled: false },
-  { type: 'offers', isDisabled: true },
-];
-
 export const POINT_EMPTY = {
   basePrice: 0,
   dateFrom: null,
@@ -52,4 +44,12 @@ export const POINT_EMPTY = {
   isFavorite: false,
   offers: [],
   type: null,
+};
+
+export const EnabledSortType = {
+  [SortType.DAY]: true,
+  [SortType.EVENT]: false,
+  [SortType.TIME]: true,
+  [SortType.PRICE]: true,
+  [SortType.OFFERS]: false
 };

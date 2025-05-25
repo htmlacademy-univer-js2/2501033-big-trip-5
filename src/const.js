@@ -31,6 +31,25 @@ export const SortType = {
   OFFERS: 'offers'
 };
 
+export const EnabledSortType = {
+  [SortType.DAY]: true,
+  [SortType.EVENT]: false,
+  [SortType.TIME]: true,
+  [SortType.PRICE]: true,
+  [SortType.OFFERS]: false
+};
+
+export const POINT_DESTINATIONS = [
+  'Moscow',
+  'London',
+  'Amsterdam',
+  'Chamonix',
+  'Geneva',
+  'Saint Petersburg',
+  'Paris',
+  'Ekaterinburg',
+];
+
 export const POINT_TYPES = [
   'taxi',
   'flight',
@@ -61,14 +80,6 @@ export const POINT_EMPTY = {
   type: DEFAULT_TYPE,
 };
 
-export const EnabledSortType = {
-  [SortType.DAY]: true,
-  [SortType.EVENT]: false,
-  [SortType.TIME]: true,
-  [SortType.PRICE]: true,
-  [SortType.OFFERS]: false
-};
-
 export const UserAction = {
   UPDATE_POINT: 'UPDATE_POINT',
   ADD_POINT: 'ADD_POINT',
@@ -76,6 +87,7 @@ export const UserAction = {
 };
 
 export const UpdateType = {
+  INIT: 'INIT',
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR'
@@ -84,4 +96,11 @@ export const UpdateType = {
 export const EditType = {
   EDITING: 'EDITING',
   CREATING: 'CREATING',
+};
+
+export const Method = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
 };

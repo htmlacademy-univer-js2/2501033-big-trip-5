@@ -9,7 +9,7 @@ const pageMainElement = document.querySelector('.page-main');
 const tripEventsElement = pageMainElement.querySelector('.trip-events');
 const tripControlsElement = tripMainElement.querySelector('.trip-controls__filters');
 
-const END_POINT = 'https://24.objects.htmlacademy.pro/big-trip';
+const END_POINT = 'https://23.objects.htmlacademy.pro/big-trip';
 const AUTHORIZATION = 'Basic qwerty12345ZXC';
 
 const service = new PointService(END_POINT, AUTHORIZATION);

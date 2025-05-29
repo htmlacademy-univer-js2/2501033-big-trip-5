@@ -195,6 +195,7 @@ export default class TripPresenter {
         this.#pointPresenters.get(point.id).setSaving();
         try {
           await this.#pointsModel.update(updateType, point);
+          this.#pointPresenters.get(point.id).closeEditMode();
         } catch {
           this.#pointPresenters.get(point.id).setAborting();
         }

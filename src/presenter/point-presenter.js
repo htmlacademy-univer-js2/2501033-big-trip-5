@@ -168,10 +168,6 @@ export default class PointPresenter {
       isMinor ? UpdateType.MINOR : UpdateType.PATCH,
       point
     );
-
-    if (!this.#editPointComponent.isDisabled) {
-      this.#switchToPoint();
-    }
   };
 
   #handleEditPointDelete = (point) => {
@@ -181,4 +177,10 @@ export default class PointPresenter {
       point,
     );
   };
+
+  closeEditMode() {
+    if (this.#mode === Mode.EDITING) {
+      this.#switchToPoint();
+    }
+  }
 }
